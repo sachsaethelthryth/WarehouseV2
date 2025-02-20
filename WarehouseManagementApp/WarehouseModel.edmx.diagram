@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7c00257353844f4a15508803046ff21" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="WarehouseDBModel.Categories" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.Customers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.OperationDetails" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.Products" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.Roles" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.StockLevels" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.Suppliers" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.Users" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseDBModel.WarehouseOperations" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Products__Catego__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Warehouse__Custo__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Operation__Opera__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Operation__Produ__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__StockLeve__Produ__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Users__RoleID__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Warehouse__Suppl__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseDBModel.FK__Warehouse__UserI__47DBAE45" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

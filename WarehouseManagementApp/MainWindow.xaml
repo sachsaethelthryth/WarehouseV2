@@ -1,0 +1,194 @@
+﻿<Window x:Class="WarehouseManagementApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Warehouse Management System" Height="450" Width="800">
+    <Grid>
+        <!-- Главное меню -->
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выйти" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе..." Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <TabControl Name="MainTabControl" Margin="0,23,0,-3">
+            <!-- Вкладка для управления товарами -->
+            <TabItem Header="Товары">
+                <TabControl>
+
+                    <!-- Основной раздел Товары -->
+                    <TabItem Header="Список товаров">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Добавить товар" Margin="5" Click="AddProduct_Click"/>
+                                <Button Content="Редактировать товар" Margin="5" Click="EditProduct_Click"/>
+                                <Button Content="Удалить товар" Margin="5" Click="DeleteProduct_Click"/>
+                                <Button Content="Обновить" Margin="5" Click="RefreshProducts_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="ProductsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50"/>
+                                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Категория" Binding="{Binding Categories.CategoryName}" Width="150"/>
+                                    <DataGridTextColumn Header="Единица измерения" Binding="{Binding UnitOfMeasure}" Width="100"/>
+                                    <DataGridTextColumn Header="Штрих-код" Binding="{Binding Barcode}" Width="100"/>
+                                    <DataGridTextColumn Header="Срок годности" Binding="{Binding ExpirationDate, StringFormat=d}" Width="100"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+
+                    <!-- Подвкладка Категории -->
+                    <TabItem Header="Категории">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Добавить категорию" Margin="5" Click="AddCategory_Click"/>
+                                <Button Content="Удалить категорию" Margin="5" Click="DeleteCategory_Click"/>
+                                <Button Content="Обновить" Margin="5" Click="RefreshCategories_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="CategoriesDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding CategoryID}" Width="50"/>
+                                    <DataGridTextColumn Header="Название" Binding="{Binding CategoryName}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+                    
+                    <!-- Подвкладка Уровень запасов -->
+                    <TabItem Header="Запасы">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Обновить запасы" Margin="5" Click="RefreshStockLevels_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="StockLevelsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID товара" Binding="{Binding ProductID}" Width="100"/>
+                                    <DataGridTextColumn Header="Количество на складе" Binding="{Binding QuantityOnHand}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+
+            <!-- Вкладка для Клиентов -->
+            <TabItem Header="Клиенты">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                        <Button Content="Добавить клиента" Margin="5" Click="AddCustomer_Click"/>
+                        <Button Content="Редактировать клиента" Margin="5" Click="EditCustomer_Click"/>
+                        <Button Content="Удалить клиента" Margin="5" Click="DeleteCustomer_Click"/>
+                        <Button Content="Обновить" Margin="5" Click="RefreshCustomers_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="CustomersDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding CustomerID}" Width="50"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Контактная информация" Binding="{Binding ContactInfo}" Width="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- Вкладка для операций -->
+            <TabItem Header="Операции">
+                <TabControl>
+                    <!-- Основной раздел Операции -->
+                    <TabItem Header="Список операций">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Добавить операцию" Margin="5" Click="AddOperation_Click"/>
+                                <Button Content="Обновить операции" Margin="5" Click="RefreshOperations_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding OperationID}" Width="50"/>
+                                    <DataGridTextColumn Header="Тип операции" Binding="{Binding OperationType}" Width="150"/>
+                                    <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="200"/>
+                                    <DataGridTextColumn Header="Пользователь" Binding="{Binding Users.Username}" Width="150"/>
+                                    <DataGridTextColumn Header="Клиент" Binding="{Binding Customers.Name}" Width="150"/>
+                                    <DataGridTextColumn Header="Поставщик" Binding="{Binding Suppliers.Name}" Width="150"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem Header="Поставщики">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Добавить поставщика" Margin="5" Click="AddSupplier_Click"/>
+                                <Button Content="Редактировать поставщика" Margin="5" Click="EditSupplier_Click"/>
+                                <Button Content="Удалить поставщика" Margin="5" Click="DeleteSupplier_Click"/>
+                                <Button Content="Обновить поставщиков" Margin="5" Click="RefreshSuppliers_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="SuppliersDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="50"/>
+                                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Контактная информация" Binding="{Binding ContactInfo}" Width="200"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+
+                    <!-- Подвкладка Детали операций -->
+                    <TabItem Header="Детали операций">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Обновить" Margin="5" Click="RefreshOperationDetails_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="OperationDetailsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID операции" Binding="{Binding OperationID}" Width="100"/>
+                                    <DataGridTextColumn Header="ID товара" Binding="{Binding ProductID}" Width="100"/>
+                                    <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+
+            <!-- Вкладка для Пользователей -->
+            <TabItem Header="Пользователи">
+                <TabControl>
+                    <!-- Основной раздел Пользователи -->
+                    <TabItem Header="Список пользователей">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Добавить пользователя" Margin="5" Click="AddUser_Click"/>
+                                <Button Content="Редактировать пользователя" Margin="5" Click="EditUser_Click"/>
+                                <Button Content="Удалить пользователя" Margin="5" Click="DeleteUser_Click"/>
+                                <Button Content="Обновить" Margin="5" Click="RefreshUsers_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding UserID}" Width="50"/>
+                                    <DataGridTextColumn Header="Логин" Binding="{Binding Username}" Width="150"/>
+                                    <DataGridTextColumn Header="Роль" Binding="{Binding Roles.RoleName}" Width="150"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+
+                    <!-- Подвкладка Роли -->
+                    <TabItem Header="Роли">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                                <Button Content="Обновить" Margin="5" Click="RefreshRoles_Click"/>
+                            </StackPanel>
+                            <DataGrid x:Name="RolesDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID Роли" Binding="{Binding RoleID}" Width="100"/>
+                                    <DataGridTextColumn Header="Название Роли" Binding="{Binding RoleName}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
