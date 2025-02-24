@@ -82,4 +82,4 @@ _Интуитивный интерфейс_: Чистый и удобный гр
 3. Отправь pull request с описанием изменений.
 
 ## Лицензия
-Просто учебный проект
+[This work](https://github.com/sachsaethelthryth/WarehouseV2/tree/7ddb96217142c09d10c16b7c3bc837fb95108545) © 2025 [sachsaethelthryth](https://github.com/sachsaethelthryth) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1) 
