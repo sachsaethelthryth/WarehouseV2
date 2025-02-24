@@ -4,8 +4,9 @@ namespace WarehouseManagementApp
 {
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
             var dbContext = new WarehouseDBEntities();
             var loginWindow = new LoginWindow(dbContext);
             if (loginWindow.ShowDialog() == true)

@@ -23,10 +23,12 @@ namespace WarehouseManagementApp
             }
 
             LoadAllDataAsync();
+            
         }
 
         private async void LoadAllDataAsync()
         {
+            
             await LoadDataAsync(LoadCategories);
             await LoadDataAsync(LoadProducts);
             await LoadDataAsync(LoadCustomers);
@@ -36,6 +38,43 @@ namespace WarehouseManagementApp
             await LoadDataAsync(LoadUsers);
             await LoadDataAsync(LoadStockLevels);
             await LoadDataAsync(LoadOperationDetails);
+            
+        }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            string userRole = Application.Current.Properties["UserRole"] as string;
+            if (string.IsNullOrEmpty(userRole))
+            {
+                MessageBox.Show("Роль пользователя не определена.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+                return;
+            }
+
+            switch (userRole)
+            {
+                case "Administrator":
+                    // Полный доступ, ничего не скрываем
+                    break;
+
+                case "Manager":
+                    // Скрываем вкладку "Пользователи"
+                    tabUsers.Visibility = Visibility.Collapsed;
+                    break;
+
+                case "WarehouseWorker":
+                    // Скрываем подвкладку "Категории" в "Товары"
+                    subTabCategories.Visibility = Visibility.Collapsed;
+                    // Скрываем подвкладку "Поставщики" в "Операции"
+                    subTabSuppliers.Visibility = Visibility.Collapsed;
+                    // Скрываем вкладку "Пользователи"
+                    tabUsers.Visibility = Visibility.Collapsed;
+                    break;
+
+                default:
+                    MessageBox.Show("Неизвестная роль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Shutdown();
+                    break;
+            }
         }
 
         private async Task LoadDataAsync(Func<Task> loadDataFunc)
@@ -200,7 +239,7 @@ namespace WarehouseManagementApp
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "Приложение для автоматизации управления складом продовольственных товаров\nКурсовая работа.\nАвтор: Бильтяев Данила",
+                "Приложение для автоматизации управления складом продовольственных товаров\nКурсовая работа.\nАвтор: Бильтяев Данила\n Версия:1.0",
                 "О программе");
         }
 
